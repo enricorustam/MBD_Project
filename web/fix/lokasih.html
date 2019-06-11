@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html> 
+<head> 
+  <meta http-equiv="content-type" content="text/html; charset=UTF-8" /> 
+  <title>Google Maps Multiple Markers</title> 
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+  <link rel="stylesheet" type="text/css" href="lokasih.css">
+  <script src="http://maps.google.com/maps/api/js?sensor=false" 
+          type="text/javascript"></script>
+</head> 
+<body>
+<nav class="navbar navbar-expand-sm navbar-dark bg-dark fixed-top">
+      <a class="navbar-brand" href="#">Seame Tel-U</a>
+      <div class="collapse navbar-collapse justify-content-end"></div>
+      <ul class="navbar-nav">
+        <li class="nav-item active">
+          <a class="nav-link" href="#">Akun</a>
+        </li>
+        <li class="nav-item">
+          <a class="btn btn-danger" href="login.html">Log out</a>
+        </li>
+      </ul>
+    </div>
+  </nav>
+  <div id="map" style="width: 100%; height: 400px; margin-top: 57px;"></div>
+  </div>
+
+  <footer style="background-color: #c1c1c1">
+    <div class="container">
+      <div class="row m-b-lg">
+        <div class="col-lg-12 text-center">
+          <div class="navy-line">
+            <h1>Kontak</h1>
+          </div>
+        </div>        
+      </div>
+      <div class="row">
+          <div class="col-lg-12 text-center">
+              <address>
+                <strong>Seame Tel-u</strong>
+                <br>
+                Gang PGA No. 5
+                <br>
+                Bandung (54321)
+                <br>
+
+
+              </address>
+          </div>
+        <div class="col-lg-12 text-center">
+          <a class="btn" href="#tentangkami">Tentang Kami</a>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-lg-8 text-center">
+          <p>
+            <strong>Seametelu2018</strong>
+          </p>
+        </div>
+      </div>
+    </div>
+  </footer>
+<!-- Latitude: -6.9752939
+Longitude: 107.633451 -->
+  <script type="text/javascript">
+    var locations = [
+      ['Bondi Beach', -6.9752139, 107.633451, 4],
+      ['Coogee Beach', -6.9752269, 107.633951, 5],
+      ['Cronulla Beach', -6.9752319, 107.633501, 3],
+      ['Manly Beach', -6.97525395, 107.633758, 2],
+      ['Maroubra Beach', -6.9752929, 107.6334416, 1]
+    ];
+
+    var map = new google.maps.Map(document.getElementById('map'), {
+      zoom: 15,
+      center: new google.maps.LatLng(-6.975, 107.633),
+      mapTypeId: google.maps.MapTypeId.ROADMAP
+    });
+
+    var infowindow = new google.maps.InfoWindow();
+
+    var marker, i;
+
+    for (i = 0; i < locations.length; i++) {  
+      marker = new google.maps.Marker({
+        position: new google.maps.LatLng(locations[i][1], locations[i][2]),
+        map: map
+      });
+
+      google.maps.event.addListener(marker, 'click', (function(marker, i) {
+        return function() {
+          infowindow.setContent(locations[i][0]);
+          infowindow.open(map, marker);
+        }
+      })(marker, i));
+    }
+  </script>
+</body>
+</html>
